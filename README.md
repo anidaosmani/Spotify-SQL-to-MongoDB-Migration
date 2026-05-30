@@ -13,10 +13,6 @@ The project includes:
 * Automated validation checks
 * Data visualization using Power BI
 
-The objective is to compare relational and non-relational database systems and demonstrate an end-to-end ETL (Extract, Transform, Load) pipeline.
-
----
-
 ## Technologies Used
 
 ### Relational Database
@@ -47,11 +43,9 @@ The objective is to compare relational and non-relational database systems and d
 
 * GitHub
 
----
-
 ## Dataset
 
-Dataset: Spotify Tracks Dataset
+**Dataset:** Spotify Tracks Dataset
 
 The dataset contains approximately 114,000 Spotify tracks with information about:
 
@@ -61,11 +55,7 @@ The dataset contains approximately 114,000 Spotify tracks with information about
 * Genres
 * Audio Features
 
----
-
 ## Relational Database Schema
-
-The SQL Server database contains the following tables:
 
 ### Artists
 
@@ -110,11 +100,7 @@ The SQL Server database contains the following tables:
 * liveness
 * speechiness
 
----
-
 ## Data Population Results
-
-The database was populated with:
 
 * Artists: 31,281
 * Genres: 114
@@ -122,48 +108,13 @@ The database was populated with:
 * Tracks: 84,975
 * Audio Features: 84,975
 
----
-
 ## MongoDB Data Model
 
-Database:
+**Database:** SpotifyMongo
 
-SpotifyMongo
-
-Collection:
-
-tracks
-
-Example document structure:
-
-```json
-{
-  "track_id": "...",
-  "track_name": "...",
-  "artist": {
-    "name": "..."
-  },
-  "album": {
-    "name": "..."
-  },
-  "genre": "...",
-  "duration_minutes": 3.54,
-  "popularity_category": "Medium",
-  "energy_level": "High",
-  "mood": "Happy",
-  "audio_features": {
-    "danceability": 0.72,
-    "energy": 0.85,
-    "valence": 0.68
-  }
-}
-```
-
----
+**Collection:** tracks
 
 ## Derived Fields Created During Migration
-
-The following fields were generated during migration:
 
 ### duration_minutes
 
@@ -171,15 +122,11 @@ Track duration converted from milliseconds to minutes.
 
 ### popularity_category
 
-Popularity score converted into:
-
 * High
 * Medium
 * Low
 
 ### energy_level
-
-Energy value converted into:
 
 * High
 * Medium
@@ -187,97 +134,35 @@ Energy value converted into:
 
 ### mood
 
-Generated from valence values:
-
 * Happy
 * Sad
 
----
-
 ## Running the Migration
-
-Navigate to the migration folder:
 
 ```bash
 cd migration
-```
-
-Run:
-
-```bash
 python migrate_to_mongo.py
 ```
 
-The script:
-
-* Reads data from SQL Server
-* Creates derived fields
-* Migrates data into MongoDB
-* Clears old MongoDB documents before migration to ensure idempotency
-
----
-
 ## Running Validation
-
-Navigate to:
 
 ```bash
 cd validation
-```
-
-Run:
-
-```bash
 python validate_migration.py
 ```
 
 Validation checks include:
 
 * Record count comparison
+* Checksum validation
 * Popularity category validation
 * Spot-check validation
 
----
-
 ## Power BI Dashboard
-
-The Power BI dashboard contains:
 
 1. Popularity Category Distribution
 2. Energy Level Distribution
 3. Average Track Duration by Genre
-
-The dashboard uses data exported from MongoDB.
-
----
-
-## Project Structure
-
-```text
-SpotifyProject
-│
-├── data
-│   └── dataset.csv
-│
-├── sql
-│   └── import_spotify.py
-│
-├── migration
-│   ├── migrate_to_mongo.py
-│   └── export_mongo_csv.py
-│
-├── validation
-│   └── validate_migration.py
-│
-├── screenshots
-│
-├── powerbi
-│   └── SpotifyDashboard.pbix
-│
-└── README.md
-```
-
----
 
 ## Conclusion
 
